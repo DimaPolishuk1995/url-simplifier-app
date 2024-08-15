@@ -21,4 +21,10 @@ export class UrlController {
       res.status(404).json({ message: 'URL not found' });
     }
   }
+
+  @Get()
+  async getAllUrls() {
+    const urls = await this.urlService.findAllUrls();
+    return urls;
+  }
 }
