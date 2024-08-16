@@ -1,19 +1,35 @@
 "use client";
 
-import React from 'react';
-import { Container, Typography, Box } from '@mui/material';
-import { UrlForm } from '@/components/form/UrlForm';
-import { UrlResult } from '@/components/url/UrlResult';
-import { useUrlShortener } from '@/hooks/useUrlShortener';
-import { UrlList } from '@/components/url/UrlList';
-import { EmptyState } from '@/components/common/EmptyState';
-import { Loader } from '@/components/common/Loader';
+import React from "react";
+import { Container, Typography, Box } from "@mui/material";
+import { UrlForm } from "@/components/form/UrlForm";
+import { UrlResult } from "@/components/url/UrlResult";
+import { useUrlShortener } from "@/hooks/useUrlShortener";
+import { UrlList } from "@/components/url/UrlList";
+import { EmptyState } from "@/components/common/EmptyState";
+import { Loader } from "@/components/common/Loader";
+import AlertNotification from "@/components/common/AlertNotification";
+
+const MemoizedUrlResult = React.memo(UrlResult);
+const MemoizedUrlList = React.memo(UrlList);
 
 export default function ShortenerPage() {
-  const { shortUrl, originalUrl, urls, urlsLoading, urlsError, handleUrlSubmit } = useUrlShortener();
+  const {
+    shortUrl,
+    originalUrl,
+    urls,
+    urlsLoading,
+    urlsError,
+    handleUrlSubmit,
+    notification,
+    handleNotificationClose,
+  } = useUrlShortener();
 
   return (
-    <Container maxWidth="sm" className="text-white flex justify-center items-center h-[100%]">
+    <Container
+      maxWidth="sm"
+      className="text-white flex justify-center items-center h-[100%]"
+    >
       {urlsLoading ? (
         <Loader />
       ) : (
@@ -27,9 +43,10 @@ export default function ShortenerPage() {
             URL Simplifier
           </Typography>
           <UrlForm onSubmit={handleUrlSubmit} />
-          <Box sx={{ visibility: shortUrl ? 'visible' : 'hidden', minHeight: '4rem' }}>
-            <UrlResult shortUrl={shortUrl} originalUrl={originalUrl} />
-          </Box>
+
+          {shortUrl && (
+            <MemoizedUrlResult shortUrl={shortUrl} originalUrl={originalUrl} />
+          )}
 
           <Typography
             variant="h6"
@@ -41,14 +58,22 @@ export default function ShortenerPage() {
           </Typography>
 
           {urlsError ? (
-            <Typography className="text-red-500 mt-4">Error loading URLs</Typography>
+            <Typography className="text-red-500 mt-4">
+              Error loading URLs
+            </Typography>
           ) : urls.length === 0 ? (
             <EmptyState />
           ) : (
-            <UrlList urls={urls} />
+            <MemoizedUrlList urls={urls} />
           )}
         </Box>
       )}
+      <AlertNotification
+        open={notification.open}
+        message={notification.message}
+        severity={notification.severity}
+        onClose={handleNotificationClose}
+      />
     </Container>
   );
 }
