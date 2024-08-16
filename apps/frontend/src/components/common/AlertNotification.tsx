@@ -1,4 +1,3 @@
-// Rename this component file to AlertNotification.tsx (or .jsx)
 import React from "react";
 import { Snackbar, Alert } from "@mui/material";
 
