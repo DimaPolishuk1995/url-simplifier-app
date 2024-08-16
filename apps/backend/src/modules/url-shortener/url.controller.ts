@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Param, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { UrlService } from './url.service';
 import { Response } from 'express';
 
@@ -8,6 +17,12 @@ export class UrlController {
 
   @Post('shorten')
   async shortenUrl(@Body('originalUrl') originalUrl: string) {
+    if (!originalUrl) {
+      throw new HttpException(
+        'Original URL is required',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const url = await this.urlService.create(originalUrl);
     return { shortUrl: url.shortUrl };
   }
@@ -24,7 +39,6 @@ export class UrlController {
 
   @Get()
   async getAllUrls() {
-    const urls = await this.urlService.findAllUrls();
-    return urls;
+    return await this.urlService.findAllUrls();
   }
 }
