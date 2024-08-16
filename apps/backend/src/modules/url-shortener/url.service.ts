@@ -5,9 +5,7 @@ import { Url } from './interfaces/url.interface';
 
 @Injectable()
 export class UrlService {
-  constructor(
-    @InjectModel('Url') private readonly urlModel: Model<Url>,
-  ) {}
+  constructor(@InjectModel('Url') private readonly urlModel: Model<Url>) {}
 
   async create(originalUrl: string): Promise<Url> {
     const { nanoid } = await import('nanoid');
@@ -18,5 +16,9 @@ export class UrlService {
 
   async findOriginalUrl(shortUrl: string): Promise<Url> {
     return this.urlModel.findOne({ shortUrl }).exec();
+  }
+
+  async findAllUrls(): Promise<Url[]> {
+    return this.urlModel.find().exec();
   }
 }
