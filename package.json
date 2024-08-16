@@ -1,0 +1,7 @@
+{
+  "name": "url-simplifier-app",
+  "version": "0.1.0",
+  "scripts": {
+    "postinstall": "npm install --prefix ./apps/backend && npm install --prefix ./apps/frontend"
+  }
+}
