@@ -5,8 +5,10 @@ services:
     build:
       context: ./apps/backend
       dockerfile: Dockerfile
-    env_file:
-      - ./.env.docker
+    environment:
+      - NODE_ENV=docker
+      - MONGO_URI=mongodb://mongodb:27017/urlsimplifier
+      - API_BASE_URL=http://backend:4000
     ports:
       - "4000:4000"
     depends_on:
@@ -25,8 +27,9 @@ services:
     build:
       context: ./apps/frontend
       dockerfile: Dockerfile
-    env_file:
-      - ./.env.docker
+    environment:
+      - NODE_ENV=docker
+      - API_BASE_URL=http://backend:4000
     ports:
       - "3000:3000"
     depends_on:
