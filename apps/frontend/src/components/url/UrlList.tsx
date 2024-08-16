@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import { FixedSizeList as List } from "react-window";
-import { Row } from "../common/Row";
+import Row from "../common/Row";
 
 interface UrlListProps {
   urls: any[];

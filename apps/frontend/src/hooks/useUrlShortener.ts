@@ -1,5 +1,5 @@
 import {
-  InvalidateQueryFilters,
+  type InvalidateQueryFilters,
   useMutation,
   useQuery,
   useQueryClient,
@@ -19,7 +19,7 @@ export function useUrlShortener() {
     data: urls = [],
     error: urlsError,
     isLoading: urlsLoading,
-  } = useQuery<{ shortUrl: string; originalUrl: string }[], Error>({
+  } = useQuery<Array<{ shortUrl: string; originalUrl: string }>, Error>({
     queryKey: ["urls"],
     queryFn: getAllUrls,
   });

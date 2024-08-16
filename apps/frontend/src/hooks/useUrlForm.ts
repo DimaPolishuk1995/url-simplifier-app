@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { urlSchema, UrlFormFields } from "@/schemas/validationSchema";
+import { urlSchema, type UrlFormFields } from "@/schemas/validationSchema";
 
 interface UseUrlFormProps {
   onSubmit: (originalUrl: string) => void;

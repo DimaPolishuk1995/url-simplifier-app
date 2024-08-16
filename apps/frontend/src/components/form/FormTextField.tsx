@@ -1,6 +1,6 @@
 import React from "react";
-import { TextField, TextFieldProps, SxProps } from "@mui/material";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { TextField, type TextFieldProps, type SxProps } from "@mui/material";
+import { type FieldError, type UseFormRegisterReturn } from "react-hook-form";
 
 interface FormTextFieldProps extends Omit<TextFieldProps, "error"> {
   label: string;
