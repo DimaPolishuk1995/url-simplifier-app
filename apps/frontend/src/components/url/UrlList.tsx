@@ -1,7 +1,7 @@
-import React from 'react';
-import { Box } from '@mui/material';
-import { FixedSizeList as List } from 'react-window';
-import { Row } from '../common/Row';
+import React from "react";
+import { Box } from "@mui/material";
+import { FixedSizeList as List } from "react-window";
+import { Row } from "../common/Row";
 
 interface UrlListProps {
   urls: any[];
@@ -9,7 +9,10 @@ interface UrlListProps {
 
 export const UrlList: React.FC<UrlListProps> = ({ urls }) => {
   return (
-    <Box sx={{ maxHeight: '400px', overflowY: 'auto' }} className="bg-gray-800 rounded-lg p-4 mt-2">
+    <Box
+      sx={{ maxHeight: "400px", overflowY: "auto" }}
+      className="bg-gray-800 rounded-lg p-4 mt-2"
+    >
       <List
         height={400}
         itemCount={urls.length}

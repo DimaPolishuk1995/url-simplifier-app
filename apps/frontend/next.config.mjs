@@ -2,14 +2,16 @@
 const nextConfig = {
   output: "standalone",
   async rewrites() {
+    const apiBaseUrl = process.env.API_BASE_URL || 'http://localhost:4000';
+
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:4000/:path*',
+        destination: `${apiBaseUrl}/:path*`,
       },
       {
         source: '/:shortUrl',
-        destination: 'http://localhost:4000/url/:shortUrl',
+        destination: `${apiBaseUrl}/url/:shortUrl`,
       },
     ];
   },

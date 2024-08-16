@@ -14,7 +14,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "@typescript-eslint", "@stylistic/js"],
+  "plugins": ["react", "prettier", "@typescript-eslint"],
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],

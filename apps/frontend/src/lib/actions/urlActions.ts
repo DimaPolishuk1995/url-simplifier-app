@@ -10,10 +10,10 @@ export interface ApiError {
 
 export async function shortenUrl(originalUrl: string): Promise<string> {
   try {
-    const response = await fetch('/api/url/shorten', {
-      method: 'POST',
+    const response = await fetch("/api/url/shorten", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ originalUrl }),
     });
@@ -26,15 +26,15 @@ export async function shortenUrl(originalUrl: string): Promise<string> {
     const data: { shortUrl: string } = await response.json();
     return data.shortUrl;
   } catch (error) {
-    console.error('Error in shortenUrl:', error);
+    console.error("Error in shortenUrl:", error);
     throw error;
   }
 }
 
 export async function getAllUrls(): Promise<UrlData[]> {
   try {
-    const response = await fetch('/api/url', {
-      method: 'GET',
+    const response = await fetch("/api/url", {
+      method: "GET",
     });
 
     if (!response.ok) {
@@ -44,7 +44,7 @@ export async function getAllUrls(): Promise<UrlData[]> {
 
     return await response.json();
   } catch (error) {
-    console.error('Error in getAllUrls:', error);
+    console.error("Error in getAllUrls:", error);
     throw error;
   }
 }
